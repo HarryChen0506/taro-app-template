@@ -7901,9 +7901,9 @@ miniprogram-api-typings@^3.2.2:
   integrity sha512-i8yxwPOGYZ33J/VoJR/mA0Ps2JKuUE6wsn8pdHqKpUrskZuxNsjVf8Z5TPLBisYis3drLdJQ5Gjon8WIwXswYg==
 
 miniprogram-compiler@^0.1.2:
-  version "0.1.2"
-  resolved "https://registry.yarnpkg.com/miniprogram-compiler/-/miniprogram-compiler-0.1.2.tgz#2afab6e288d8bc085f803b1d49ae59c5df236e99"
-  integrity sha512-TDEV9Shvn41rQThyPffNnpRJk/zS+wFM9GCYo7gUjXRwMuMqPpjmpXumxgryFyWH7wX6BJ702kxFwiOuL8RUnw==
+  version "0.1.3"
+  resolved "https://registry.yarnpkg.com/miniprogram-compiler/-/miniprogram-compiler-0.1.3.tgz#e5e29786db3dc93e5749b67127f563292ca0690f"
+  integrity sha512-RvAtq5QKLRSD2VZ3+bgXHN+cO3uJBFSpICUDhmgsiJX4ZNpKYAuHjW2U78XLBWM6hwVXNwWFudF3x9V6lTkG7w==
   dependencies:
     glob "^7.1.3"
     unescape-js "^1.1.1"
