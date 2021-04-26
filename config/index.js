@@ -60,6 +60,7 @@ const config = {
   h5: {
     publicPath: '/',
     staticDirectory: 'static',
+    esnextModules: ['taro-ui'],
     output: {
       filename: 'js/[name].[hash].js',
       chunkFilename: 'js/[name].[chunkhash].js'

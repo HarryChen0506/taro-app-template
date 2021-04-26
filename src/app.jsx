@@ -1,9 +1,11 @@
 import { Component } from 'react'
 import { Provider } from 'react-redux'
 
+import '@/styles/taro-ui.scss'
+import './app.less'
+
 import configStore from './store'
 
-import './app.less'
 
 const store = configStore()
 

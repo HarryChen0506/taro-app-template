@@ -1,7 +1,8 @@
 import { Component } from 'react'
 import { connect } from 'react-redux'
 // import Taro from '@tarojs/taro'
-import { View, Button } from '@tarojs/components'
+import { View } from '@tarojs/components'
+import { AtButton } from 'taro-ui'
 import { add, minus, asyncAdd } from '@/store/actions/counter'
 import { user as userHttpService } from '@/services/http'
 import { cloneDeep } from '@/vc-util'
@@ -71,9 +72,9 @@ class Dashboard extends Component {
       <View className='page-dashboard'>
         <View style='padding: 20px; overflow: scroll'>{JSON.stringify(this.props.user)}</View>
         <View style='padding: 20px; overflow: scroll'>hello world</View>
-        <Button className='dec_btn' onClick={this.props.dec}>-</Button>
-        <Button className='dec_btn' onClick={this.handleQuery}>测试请求</Button>
-        <Button className='dec_btn' onClick={this.handleQueryUser}>获取用户</Button>
+        <AtButton className='btn' type='primary' onClick={this.props.dec}>-</AtButton>
+        <AtButton className='btn' type='primary' onClick={this.handleQuery}>测试请求</AtButton>
+        <AtButton className='btn' type='primary' onClick={this.handleQueryUser}>获取用户</AtButton>
       </View>
     )
   }
