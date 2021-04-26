@@ -42,7 +42,7 @@ class Dashboard extends Component {
     // }).catch(err => {
     //   console.error('err', err)
     // })
-    session.saveSession('heoo')
+    // session.saveSession('heoo')
     setTimeout(() => {
       const a = { name: '123' }
       const b = cloneDeep(a)
