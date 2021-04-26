@@ -1,8 +1,9 @@
-import React, { Component } from 'react'
+import { Component } from 'react'
 import { connect } from 'react-redux'
-import Taro from '@tarojs/taro'
-import { View, Button, Image } from '@tarojs/components'
+// import Taro from '@tarojs/taro'
+import { View, Button } from '@tarojs/components'
 import { add, minus, asyncAdd } from '@/store/actions/counter'
+import { cloneDeep } from '@/vc-util'
 import './index.less'
 
 @connect(({ counter, user }) => ({
@@ -34,11 +35,27 @@ class Dashboard extends Component {
 
   componentDidHide() { }
 
+  handleQuery = () => {
+    // commonHttpService.ossGetSignature().then(res => {
+    //   console.log('handleQuery', res)
+    // }).catch(err => {
+    //   console.error('err', err)
+    // })
+    setTimeout(() => {
+      const a = { name: '123' }
+      const b = cloneDeep(a)
+      a.name = 'world'
+      console.log(a, b)
+    }, 1000)
+  }
+
   render() {
     return (
       <View className='page-dashboard'>
         <View style='padding: 20px; overflow: scroll'>{JSON.stringify(this.props.user)}</View>
         <View style='padding: 20px; overflow: scroll'>hello world</View>
+        <Button className='dec_btn' onClick={this.props.dec}>-</Button>
+        <Button className='dec_btn' onClick={this.handleQuery}>测试请求</Button>
       </View>
     )
   }
