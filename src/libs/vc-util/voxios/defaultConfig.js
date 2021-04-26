@@ -1,38 +1,16 @@
 import * as qs from 'qs'
-import { Session } from '../utils/session'
-
-const INVALID_HTTP_CODE = {
-  INVALID_TOKEN: -301001,
-  TOKEN_EXPIRED: -301002,
-}
 
 // const STATUS_CODE = 'status'
 const ERROR_CODE = 'error_code'
 
-const defaultLogout = () => {
-  new Session().clearSession()
-  window.location.href = '/login'
-}
 
 const defaultConfig = {
-  addAuthHeader: () => ({ ...new Session().getAuthHeader() }),
+  addAuthHeader: () => ({}),
   transformHeaders: headers => headers,
   axiosConfig: {
     paramsSerializer: params => qs.stringify(params, { arrayFormat: 'repeat' }),
   },
   wxConfig: {},
-  invalidToken: [
-    INVALID_HTTP_CODE.INVALID_TOKEN,
-    INVALID_HTTP_CODE.TOKEN_EXPIRED,
-  ],
-  isTokenInvalid: (response, invalidToken = []) => {
-    const { data = {} } = response
-    const code = data[ERROR_CODE]
-    if (Array.isArray(invalidToken) && invalidToken.includes(code)) {
-      return true
-    }
-    return false
-  },
   isSuccess: (response) => {
     const { status } = response
     if (status === 200) {
@@ -47,23 +25,9 @@ const defaultConfig = {
   onBeforeRequest: () => { },
   onSuccess: (res, context) => {
     const { options, config } = context
-    const invalidToken = options?.config?.invalidToken || config?.invalidToken
-    const isTokenInvalid = options?.config?.isTokenInvalid || config?.isTokenInvalid
     const isSuccess = options?.config?.isSuccess || config?.isSuccess
     const getErrorCode = options?.config?.getErrorCode || config?.getErrorCode
     const { data = {} } = res
-
-    if (typeof isTokenInvalid === 'function' && isTokenInvalid(res, invalidToken)) {
-      // tokenInvalid钩子
-      const onTokenInvalid = context.getModule('onTokenInvalid')
-      typeof onTokenInvalid === 'function' && onTokenInvalid(res)
-      // 直接退出, 如果不想走该步骤，可以用一个空函数覆盖掉logout
-      const logout = context.getModule('logout') || defaultLogout
-      typeof logout === 'function' && logout(res)
-      // eslint-disable-next-line no-console
-      console.warn('token无效或过期')
-      return data
-    }
 
     if ((typeof isSuccess === 'function' && isSuccess(res)) || isSuccess === true) {
       data.statusText = 'OK'

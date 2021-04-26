@@ -16,6 +16,7 @@ export const transformRequestOptions = (options = {}, config = {}) => {
   const finalAxiosConfig = { ...axiosConfigFromConfig, ...axiosConfigFromOptions, }
   const finalWxConfig = { ...wxConfigFromConfig, ...wxConfigFromOptions, }
   let newUrl = url
+  
   try {
     let domain = ''
     if (newUrl.match(/[a-zA-z]+:\/\/[^/]*/)) {
@@ -28,16 +29,18 @@ export const transformRequestOptions = (options = {}, config = {}) => {
     // eslint-disable-next-line no-console
     console.error('voxios compile url params fail!', e, options)
   }
+
   const newOptions = {
     ...restOptions,
     method: method.toLowerCase(),
     headers,
     data,
   }
+
   if (newOptions.method === 'get') {
     newOptions.params = data
-    delete newOptions.data
   }
+
   return {
     url: newUrl,
     ...newOptions,
@@ -49,6 +52,11 @@ export const transformRequestOptions = (options = {}, config = {}) => {
 export const defaultAxiosRequest = (options = {}, config = {}, context) => {
   // console.log('request option config', options, config, context)
   const { onSuccess, onError, normalizeError } = config
+
+  if (options.method === 'get') {
+    delete options.data
+  }
+
   return axios(options)
     .then((res) => {
       const { data = {}, status } = res

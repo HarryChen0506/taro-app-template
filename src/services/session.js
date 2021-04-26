@@ -3,7 +3,7 @@ import { Session } from '@/vc-util';
 const session = new Session()
   .config({
     token: 'token',
-    authHeader: 'header-token'
+    authHeader: 'my-token'
   });
 
 export default session;

@@ -4,7 +4,7 @@ import { connect } from 'react-redux'
 import { View, Button } from '@tarojs/components'
 import { add, minus, asyncAdd } from '@/store/actions/counter'
 import { user as userHttpService } from '@/services/http'
-import { cloneDeep, localStorage } from '@/vc-util'
+import { cloneDeep } from '@/vc-util'
 import session from '@/services/session'
 import './index.less'
 
@@ -41,7 +41,7 @@ class Dashboard extends Component {
     session.saveSession('hello')
 
     userHttpService.login({
-      data: { name: '张三' }
+      data: { name: '张三' },
     }).then(res => {
       console.log('handleQuery', res)
     }).catch(err => {
@@ -56,6 +56,16 @@ class Dashboard extends Component {
     }, 1000)
   }
 
+  handleQueryUser = () => {
+    userHttpService.currentUser({
+      data: { name: '张三', age: 20 },
+    }).then(res => {
+      console.log('handleQueryUser', res)
+    }).catch(err => {
+      console.error('err', err)
+    })
+  }
+
   render() {
     return (
       <View className='page-dashboard'>
@@ -63,6 +73,7 @@ class Dashboard extends Component {
         <View style='padding: 20px; overflow: scroll'>hello world</View>
         <Button className='dec_btn' onClick={this.props.dec}>-</Button>
         <Button className='dec_btn' onClick={this.handleQuery}>测试请求</Button>
+        <Button className='dec_btn' onClick={this.handleQueryUser}>获取用户</Button>
       </View>
     )
   }

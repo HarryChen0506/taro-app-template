@@ -1,5 +1,6 @@
 import { Voxios, voxiosDefaultConfig } from '@/vc-util';
 import Taro from '@tarojs/taro'
+import session from '@/services/session'
 // import { logout, onThrowError } from '@/services/system';
 
 const ERROR_CODE = 'code';
@@ -30,6 +31,9 @@ const wxRequest = (options = {}, config = {}, context) => {
 const request = new Voxios()
   .setConfig({
     ...voxiosDefaultConfig,
+    addAuthHeader: () => {
+      return session.getAuthHeader()
+    },
     request: wxRequest,
     isSuccess: (response) => {
       const { status, data } = response;
@@ -42,9 +46,6 @@ const request = new Voxios()
       const { data = {} } = response;
       return data[ERROR_CODE];
     },
-  })
-  .addModule('logout', () => {
-    // logout();
   })
   .addModule('onThrowError', (...args) => {
     // onThrowError(...args);
