@@ -1,7 +1,7 @@
 import * as axios from 'axios'
 import { compile } from 'path-to-regexp'
 
-export const transformAxiosOptions = (options = {}, config = {}) => {
+export const transformRequestOptions = (options = {}, config = {}) => {
   const {
     url = '',
     method = 'get',
@@ -9,10 +9,12 @@ export const transformAxiosOptions = (options = {}, config = {}) => {
     params,
     headers,
     axiosConfig: axiosConfigFromOptions,
+    wxConfig: wxConfigFromOptions,
     ...restOptions
   } = options
-  const { axiosConfig: axiosConfigFromConfig } = config
-  const finalAxiosConfig = { ...axiosConfigFromConfig, ...axiosConfigFromOptions }
+  const { axiosConfig: axiosConfigFromConfig, wxConfig: wxConfigFromConfig } = config
+  const finalAxiosConfig = { ...axiosConfigFromConfig, ...axiosConfigFromOptions, }
+  const finalWxConfig = { ...wxConfigFromConfig, ...wxConfigFromOptions, }
   let newUrl = url
   try {
     let domain = ''
@@ -40,6 +42,7 @@ export const transformAxiosOptions = (options = {}, config = {}) => {
     url: newUrl,
     ...newOptions,
     ...finalAxiosConfig,
+    ...finalWxConfig
   }
 }
 
@@ -70,17 +73,22 @@ export const request = (options = {}, config = {}, context) => {
 export const createInstance = (config = {}, context) => (options = {}) => {
   const mergedConfig = { ...config, ...options.config }
   const { onBeforeRequest, addAuthHeader, transformHeaders } = mergedConfig
-  const axiosOptions = transformAxiosOptions(options, mergedConfig)
-  context.options = axiosOptions
+  const requestOptions = transformRequestOptions(options, mergedConfig)
+
+  context.options = requestOptions
   context.config = mergedConfig
+
   if (typeof addAuthHeader === 'function') {
-    axiosOptions.headers = { ...axiosOptions.headers, ...addAuthHeader(axiosOptions.headers) }
+    requestOptions.headers = { ...requestOptions.headers, ...addAuthHeader(requestOptions.headers) }
   }
+
   if (typeof transformHeaders === 'function') {
-    axiosOptions.headers = transformHeaders(axiosOptions.headers)
+    requestOptions.headers = transformHeaders(requestOptions.headers)
   }
+
   if (typeof onBeforeRequest === 'function') {
     onBeforeRequest(context)
   }
-  return request(axiosOptions, mergedConfig, context)
+
+  return request(requestOptions, mergedConfig, context)
 }

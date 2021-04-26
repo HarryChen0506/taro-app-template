@@ -3,6 +3,7 @@ import { connect } from 'react-redux'
 // import Taro from '@tarojs/taro'
 import { View, Button } from '@tarojs/components'
 import { add, minus, asyncAdd } from '@/store/actions/counter'
+import { user as userHttpService } from '@/services/http'
 import { cloneDeep, localStorage } from '@/vc-util'
 import session from '@/services/session'
 import './index.less'
@@ -37,11 +38,11 @@ class Dashboard extends Component {
   componentDidHide() { }
 
   handleQuery = () => {
-    // commonHttpService.ossGetSignature().then(res => {
-    //   console.log('handleQuery', res)
-    // }).catch(err => {
-    //   console.error('err', err)
-    // })
+    userHttpService.login().then(res => {
+      console.log('handleQuery', res)
+    }).catch(err => {
+      console.error('err', err)
+    })
     // session.saveSession('heoo')
     setTimeout(() => {
       const a = { name: '123' }
