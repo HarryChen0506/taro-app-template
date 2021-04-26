@@ -1,35 +1,25 @@
 
+import Taro from '@tarojs/taro'
+
 export const localStorage = {
   save(key, value) {
-    return window.localStorage.setItem(key, value)
+    return Taro.setStorageSync(key, value)
   },
   get(key) {
-    return window.localStorage.getItem(key)
+    return Taro.getStorageSync(key)
   },
   remove(key) {
-    return window.localStorage.removeItem(key)
+    return Taro.removeStorageSync(key)
   },
   canSupport() {
-    return window && typeof window.localStorage === 'object'
+    return Taro && Taro.getStorageSync
   }
 }
 
-export const sessionStorage = {
-  save: function (key, value) {
-    return window.sessionStorage.setItem(key, value)
-  },
-  get: function (key) {
-    return window.sessionStorage.getItem(key)
-  },
-  remove: function (key) {
-    return window.sessionStorage.removeItem(key)
-  },
-  canSupport() {
-    return window && typeof window.sessionStorage === 'object'
-  }
-}
+export const sessionStorage = localStorage
 
 const global = {}
+
 export const globalStorage = {
   save: function (key, value) {
     return global[key] = value

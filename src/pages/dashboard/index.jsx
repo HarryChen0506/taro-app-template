@@ -3,7 +3,8 @@ import { connect } from 'react-redux'
 // import Taro from '@tarojs/taro'
 import { View, Button } from '@tarojs/components'
 import { add, minus, asyncAdd } from '@/store/actions/counter'
-import { cloneDeep } from '@/vc-util'
+import { cloneDeep, localStorage } from '@/vc-util'
+import session from '@/services/session'
 import './index.less'
 
 @connect(({ counter, user }) => ({
@@ -41,6 +42,7 @@ class Dashboard extends Component {
     // }).catch(err => {
     //   console.error('err', err)
     // })
+    session.saveSession('heoo')
     setTimeout(() => {
       const a = { name: '123' }
       const b = cloneDeep(a)
