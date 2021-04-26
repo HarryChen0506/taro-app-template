@@ -1,3 +1,5 @@
+const path = require('path');
+
 const config = {
   projectName: 'taro-app-template',
   date: '2021-4-25',
@@ -19,6 +21,19 @@ const config = {
     }
   },
   framework: 'react',
+  alias: {
+    '@/components': path.resolve(__dirname, '..', 'src/components'),
+    '@/libs': path.resolve(__dirname, '..', 'src/libs'),
+    '@/vc-util': path.resolve(__dirname, '..', 'src/libs/vc-util'),
+    '@/utils': path.resolve(__dirname, '..', 'src/utils'),
+    '@/styles': path.resolve(__dirname, '..', 'src/styles'),
+    '@/assets': path.resolve(__dirname, '..', 'src/assets'),
+    '@/constants': path.resolve(__dirname, '..', 'src/constants'),
+    '@/store': path.resolve(__dirname, '..', 'src/store'),
+    '@/services': path.resolve(__dirname, '..', 'src/services'),
+    '@/package': path.resolve(__dirname, '..', 'package.json'),
+    '@/project': path.resolve(__dirname, '..', 'project.config.json'),
+  },
   mini: {
     postcss: {
       pxtransform: {
