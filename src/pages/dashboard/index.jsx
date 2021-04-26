@@ -38,7 +38,9 @@ class Dashboard extends Component {
   componentDidHide() { }
 
   handleQuery = () => {
-    userHttpService.login().then(res => {
+    userHttpService.login({
+      data: { name: '张三' }
+    }).then(res => {
       console.log('handleQuery', res)
     }).catch(err => {
       console.error('err', err)

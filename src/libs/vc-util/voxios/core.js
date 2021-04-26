@@ -46,7 +46,7 @@ export const transformRequestOptions = (options = {}, config = {}) => {
   }
 }
 
-export const request = (options = {}, config = {}, context) => {
+export const defaultAxiosRequest = (options = {}, config = {}, context) => {
   // console.log('request option config', options, config, context)
   const { onSuccess, onError, normalizeError } = config
   return axios(options)
@@ -90,5 +90,9 @@ export const createInstance = (config = {}, context) => (options = {}) => {
     onBeforeRequest(context)
   }
 
-  return request(requestOptions, mergedConfig, context)
+  if (typeof mergedConfig.request === 'function') {
+    return mergedConfig.request(requestOptions, mergedConfig, context)
+  }
+
+  return defaultAxiosRequest(requestOptions, mergedConfig, context)
 }
