@@ -36,8 +36,8 @@ const request = new Voxios()
     },
     request: wxRequest,
     isSuccess: (response) => {
-      const { status, data } = response;
-      if (status === 200 && data?.code == 200) {
+      const { statusCode, data } = response;
+      if (statusCode === 200 && data?.code == 200) {
         return true;
       }
       return false;
