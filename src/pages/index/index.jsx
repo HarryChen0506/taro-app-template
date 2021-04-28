@@ -1,7 +1,7 @@
 import { Component } from 'react'
 import { connect } from 'react-redux'
+import Taro from '@tarojs/taro'
 import { View, Button, Text } from '@tarojs/components'
-
 import { add, minus, asyncAdd } from '@/store/actions/counter'
 
 import './index.less'
@@ -31,14 +31,20 @@ class Index extends Component {
 
   componentDidHide() { }
 
+  pageToSearch = () => {
+    Taro.navigateTo({
+      url: '/pages/dashboard/index',
+    });
+  };
+
   render() {
     return (
       <View className='index'>
+        <View><Text>counter: {this.props.counter.num}</Text></View>
         <Button className='add_btn' onClick={this.props.add}>+</Button>
         <Button className='dec_btn' onClick={this.props.dec}>-</Button>
         <Button className='dec_btn' onClick={this.props.asyncAdd}>async</Button>
-        <View><Text>{this.props.counter.num}</Text></View>
-        <View><Text>Hello, World</Text></View>
+        <Button className='dec_btn' onClick={this.pageToSearch}>hook 写法</Button>
       </View>
     )
   }
