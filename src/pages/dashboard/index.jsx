@@ -3,8 +3,8 @@ import { useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import Taro, { getCurrentInstance, useReady, useDidShow, useDidHide, usePullDownRefresh } from '@tarojs/taro'
 import { View } from '@tarojs/components'
-// import { AtButton } from 'taro-ui'
-// import { add, minus, asyncAdd } from '@/store/actions/counter'
+import { AtButton } from 'taro-ui'
+import { add, minus, asyncAdd } from '@/store/actions/counter'
 // import { user as userHttpService } from '@/services/http'
 // import { loginByWx, wxBindPhone } from '@/services/system'
 // import { cloneDeep } from 'voxelcloud-ui'
@@ -42,13 +42,14 @@ const Dashboard = () => {
   return (
     <View className='page-dashboard'>
       <View style='padding: 20px; overflow: scroll'>counter: {counter?.num}</View>
-      {/* <AtButton className='btn' type='primary' onClick={() => dispatch(minus())}>-</AtButton>
+      <AtButton className='btn' type='primary' onClick={() => dispatch(minus())}>-</AtButton>
+      <AtButton className='btn' type='primary' onClick={() => dispatch(add())}>+</AtButton>
       <AtButton className='btn' type='primary' onClick={() => dispatch(asyncAdd())}>async +</AtButton>
-      <AtButton className='btn' type='primary' onClick={fetchUserInfo} >测试请求 - 获取用户</AtButton>
+      {/* <AtButton className='btn' type='primary' onClick={fetchUserInfo} >测试请求 - 获取用户</AtButton>
       <AtButton className='btn' type='primary' onClick={handleGetCode}>微信获取code</AtButton>
       <AtButton className='btn' type='primary' openType='getUserInfo' onGetUserInfo={handleGetUserInfo}>微信获取用户信息</AtButton>
       <AtButton className='btn' type='primary' onClick={handleSystemLogin}>微信code登录APP</AtButton>
-      <AtButton className='btn' type='primary' openType='getPhoneNumber' onGetPhoneNumber={handleBindPhone}>APP绑定微信手机号</AtButton> */}
+      <AtButton className='btn' type='primary' openType='getPhoneNumber' onGetPhoneNumber={handleBindPhone}>APP绑定微信手机号</AtButton>  */}
     </View>
   )
 }
