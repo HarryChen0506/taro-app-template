@@ -5,10 +5,9 @@ import Taro, { getCurrentInstance, useReady, useDidShow, useDidHide, usePullDown
 import { View } from '@tarojs/components'
 import { AtButton } from 'taro-ui'
 import { add, minus, asyncAdd } from '@/store/actions/counter'
-// import { user as userHttpService } from '@/services/http'
-// import { loginByWx, wxBindPhone } from '@/services/system'
-// import { cloneDeep } from 'voxelcloud-ui'
-// import session from '@/services/session'
+import { user as userHttpService } from '@/services/http'
+import { loginByWx, wxBindPhone } from '@/services/system'
+import session from '@/services/session'
 import './index.less'
 
 /**
@@ -39,17 +38,65 @@ const Dashboard = () => {
   // 详情可查阅：【Taro 文档】-> 【进阶指南】->【Hooks】
   usePullDownRefresh(() => { })
 
+  const fetchUserInfo = () => {
+    userHttpService.currentUser({
+      data: { name: '张三', age: 20 },
+    }).then(res => {
+      console.log('fetchUserInfo', res)
+    }).catch(err => {
+      console.error('error', err)
+    })
+  }
+
+  const handleGetCode = () => {
+    Taro.login({
+      success(res) {
+        if (res.code) {
+          //发起网络请求
+          console.log('获取code', res)
+        } else {
+          console.log('登录失败！' + res.errMsg)
+        }
+      }
+    })
+  }
+
+
+  const handleGetUserInfo = (e) => {
+    console.log('获取用户信息', e?.detail)
+  }
+
+  const handleSystemLogin = () => {
+    loginByWx().then(res => {
+      console.log('登录成功', res)
+      // 假设获取了token, 此时存到session服务中，每次请求将会携带header: {token: '....'}
+      session.save('token-123456')
+    }, err => {
+      console.log('err', err)
+    })
+  }
+
+  const handleBindPhone = (e) => {
+    console.log('获取手机信息', e?.detail)
+    // 后端绑定手机号
+    wxBindPhone(e).then(res => {
+      console.log('wxBindPhone', res)
+    }).catch(err => {
+      console.log('err', err)
+    })
+  }
+
   return (
     <View className='page-dashboard'>
-      <View style='padding: 20px; overflow: scroll'>counter: {counter?.num}</View>
+      <View style='padding: 10px'>counter: {counter?.num}</View>
       <AtButton className='btn' type='primary' onClick={() => dispatch(minus())}>-</AtButton>
       <AtButton className='btn' type='primary' onClick={() => dispatch(add())}>+</AtButton>
       <AtButton className='btn' type='primary' onClick={() => dispatch(asyncAdd())}>async +</AtButton>
-      {/* <AtButton className='btn' type='primary' onClick={fetchUserInfo} >测试请求 - 获取用户</AtButton>
+      <AtButton className='btn' type='primary' onClick={fetchUserInfo} >测试请求 - 获取用户</AtButton>
       <AtButton className='btn' type='primary' onClick={handleGetCode}>微信获取code</AtButton>
       <AtButton className='btn' type='primary' openType='getUserInfo' onGetUserInfo={handleGetUserInfo}>微信获取用户信息</AtButton>
       <AtButton className='btn' type='primary' onClick={handleSystemLogin}>微信code登录APP</AtButton>
-      <AtButton className='btn' type='primary' openType='getPhoneNumber' onGetPhoneNumber={handleBindPhone}>APP绑定微信手机号</AtButton>  */}
+      <AtButton className='btn' type='primary' openType='getPhoneNumber' onGetPhoneNumber={handleBindPhone}>APP绑定微信手机号</AtButton>
     </View>
   )
 }
