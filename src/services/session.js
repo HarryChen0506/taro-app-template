@@ -1,4 +1,4 @@
-import { Session } from 'voxelcloud-utils';
+import Session from '@/utils/Session';
 
 const session = new Session({ name: 'my-token' })
 

@@ -73,6 +73,8 @@ const Dashboard = () => {
       session.save('token-123456')
     }, err => {
       console.log('err', err)
+      // 为了方便测试接口，虽然失败，也存储一个mock token
+      session.save('token-error-123')
     })
   }
 
@@ -100,7 +102,6 @@ const Dashboard = () => {
     </View>
   )
 }
-
 
 export default Dashboard
 
