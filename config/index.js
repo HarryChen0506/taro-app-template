@@ -60,6 +60,25 @@ const config = {
     publicPath: '/',
     staticDirectory: 'static',
     esnextModules: ['taro-ui'],
+    output: {
+      filename: 'js/[name].[hash].js',
+      chunkFilename: 'js/[name].[chunkhash].js'
+    },
+    imageUrlLoaderOption: {
+      limit: 5000,
+      name: 'static/images/[name].[hash].[ext]'
+    },
+    miniCssExtractPluginOption: {
+      filename: 'css/[name].[hash].css',
+      chunkFilename: 'css/[name].[chunkhash].css'
+    },
+    router: {
+      mode: 'browser', // 或者是 'browser'
+      customRoutes: {
+        '/pages/index/index': '/',
+        '/pages/dashboard/index': '/dashboard',
+      }
+    },
     postcss: {
       autoprefixer: {
         enable: true,
