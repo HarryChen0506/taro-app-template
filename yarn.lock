@@ -9919,7 +9919,7 @@ tslib@^1.10.0, tslib@^1.8.1, tslib@^1.9.0:
   resolved "https://registry.yarnpkg.com/tslib/-/tslib-1.14.1.tgz#cf2d38bdc34a134bcaf1091c41f6619e2f672d00"
   integrity sha512-Xni35NKzjgMrwevysHTCArtLDpPvye8zV/0E4EyYn43P7/7qvQwPh9BGkHewbMulVntbigmcT7rdX3BNo9wRJg==
 
-tslib@^2.3.0:
+tslib@^2.3.0, tslib@^2.3.1:
   version "2.3.1"
   resolved "https://registry.yarnpkg.com/tslib/-/tslib-2.3.1.tgz#e8a335add5ceae51aa261d32a490158ef042ef01"
   integrity sha512-77EbyPPpMz+FRFRuAFlWMtmgUWGe9UOG2Z25NqCwiIjRhOf5iKGuzSe5P2w1laq+FkRy4p+PCuVkJSGkzTEKVw==
@@ -10306,15 +10306,16 @@ vm2@^3.8.4:
   resolved "https://registry.yarnpkg.com/vm2/-/vm2-3.9.5.tgz#5288044860b4bbace443101fcd3bddb2a0aa2496"
   integrity sha512-LuCAHZN75H9tdrAiLFf030oW7nJV5xwNMuk1ymOZwopmuK3d2H4L1Kv4+GFHgarKiLfXXLFU+7LDABHnwOkWng==
 
-voxelcloud-utils@^0.0.4:
-  version "0.0.4"
-  resolved "https://registry.yarnpkg.com/voxelcloud-utils/-/voxelcloud-utils-0.0.4.tgz#0ff32ded998370917cc610f649aef70f21ae5616"
-  integrity sha512-r98Jkn7ubdlv3+S/zkh/ZI/2Qv49QUKeLSf5th66w4EJXBvyIzQdyF+mcZDyz/HW26Y26GWerxKCtF8t2C5tdA==
+voxelcloud-utils@^0.0.5:
+  version "0.0.5"
+  resolved "https://registry.yarnpkg.com/voxelcloud-utils/-/voxelcloud-utils-0.0.5.tgz#57e81c3b58a19cf6d9f162cbf8610b73bd07a1b9"
+  integrity sha512-ew4HCEp6YtjoWKWPE3fU3OjMgtqrMbpD3PhWlUQJP+y0Q+G5/Z7cMnaJMEMA23RF9xz5kFxgRcZup739g69G/A==
   dependencies:
     axios "^0.21.1"
     path-to-regexp "^6.2.0"
     qs "^6.10.1"
     react "^17.0.1"
+    tslib "^2.3.1"
 
 w3c-hr-time@^1.0.1:
   version "1.0.2"
